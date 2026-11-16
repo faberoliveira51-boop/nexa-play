@@ -3,255 +3,105 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NEXA PLAY</title>
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;
- background:#080e1b;
- color:white;
- font-family:Arial,sans-serif
-}
-header{
- background:#101c32;
- padding:20px;
- display:flex;
- justify-content:space-between;
- align-items:center
-}
-.logo{font-size:26px;font-weight:bold}
-.logo span{color:#398cff}
-main{max-width:1000px;margin:auto;padding:20px}
-.banner{
- background:linear-gradient(120deg,#174b91,#101c32);
- padding:30px;
- border-radius:16px;
- margin-bottom:25px
-}
-button{
- background:#1768e8;
- color:white;
- border:0;
- padding:13px 20px;
- border-radius:9px;
- font-weight:bold;
- cursor:pointer
-}
-button:disabled{opacity:.5}
-.grid{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:15px
-}
-.jogo{
- background:#14243d;
- padding:20px;
- border-radius:14px;
- text-align:center
-}
-.emoji{font-size:55px;margin:12px}
-.game{
- display:none;
- background:#101c32;
- margin-top:25px;
- padding:22px;
- border:1px solid #2866b0;
- border-radius:16px;
- text-align:center
-}
-.rolos{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:9px;
- margin:25px 0
-}
-.rolo{
- background:#172e50;
- border:2px solid #398cff;
- border-radius:12px;
- font-size:clamp(38px,13vw,65px);
- padding:18px 2px
-}
-.rolando{animation:giro .15s infinite alternate}
-@keyframes giro{
- from{transform:translateY(-5px)}
- to{transform:translateY(5px)}
-}
-.pontuacao{
- color:#ffd65a;
- font-size:24px;
- font-weight:bold
-}
-#resultado{
- min-height:30px;
- color:#85baff;
- font-weight:bold
-}
-.voltar{margin-top:15px;background:#344964}
-footer{
- text-align:center;
- padding:30px;
- color:#9bb1ce
-}
-@media(min-width:700px){
- .grid{grid-template-columns:repeat(4,1fr)}
-}
+body{margin:0;background:#101014;color:white;font-family:Arial,sans-serif}
+header{padding:18px;display:flex;justify-content:space-between;align-items:center;background:#19191f;border-bottom:1px solid #38302a}
+.logo{font-size:23px;font-weight:bold;color:#f5c84c}
+.menu{color:#ccc;font-size:13px}
+main{max-width:850px;margin:auto;padding:18px}
+h2{font-size:19px}
+.saldo{background:linear-gradient(120deg,#302514,#171717);padding:22px;border:1px solid #92712b;border-radius:15px;margin:20px 0}
+.saldo small{color:#c9b987}
+.valor{font-size:28px;color:#f5c84c;font-weight:bold;margin:8px 0}
+button{background:#d9ad3c;color:#17130a;border:0;padding:12px 16px;border-radius:8px;font-weight:bold;cursor:pointer}
+button:active{transform:scale(.97)}
+.jogos{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+.jogo{background:#202027;border:1px solid #383238;border-radius:13px;padding:22px 12px;text-align:center}
+.jogo .emoji{font-size:45px}
+.jogo h3{margin:10px 0;color:#f5c84c}
+.jogo p{font-size:12px;color:#aaa}
+.jogo button{width:100%;margin-top:8px}
+.info{color:#aaa;font-size:12px;line-height:1.6;margin-top:25px}
+nav{display:flex;justify-content:space-around;padding:17px 5px;background:#19191f;position:sticky;bottom:0;color:#e5c15c;font-size:12px}
+#mensagem{color:#f5c84c;text-align:center;min-height:22px;margin-top:15px}
+@media(min-width:600px){.jogos{grid-template-columns:repeat(4,1fr)}}
 </style>
 </head>
-
 <body>
 <header>
- <div class="logo">NEXA <span>PLAY</span></div>
- <div>🎮 Jogos gratuitos</div>
+ <div class="logo">✦ NEXA PLAY</div>
+ <div class="menu">PLATAFORMA DEMO</div>
 </header>
-
 <main>
- <section class="banner">
-  <h1>A diversão começa aqui!</h1>
-  <p>Bem-vindo à NEXA PLAY.</p>
-  <p>Explore nossos jogos gratuitos!</p>
+ <h2>Bem-vindo à NEXA PLAY!</h2>
+ <p style="color:#aaa">Sua diversão começa aqui.</p>
+
+ <section class="saldo">
+  <small>SALDO DEMONSTRATIVO</small>
+  <div class="valor" id="saldo">1.000 créditos</div>
+  <button onclick="bonus()">+ Ganhar créditos fictícios</button>
  </section>
 
- <h2>🎮 Nossos jogos</h2>
-
- <section class="grid">
+ <h2>🎮 Jogos disponíveis</h2>
+ <div class="jogos">
   <div class="jogo">
    <div class="emoji">🐯</div>
    <h3>Tigre Dourado</h3>
-   <button onclick="abrirJogo()">Jogar grátis</button>
+   <p>Jogo demonstrativo</p>
+   <button onclick="abrir('Tigre Dourado')">Conhecer</button>
   </div>
-
   <div class="jogo">
    <div class="emoji">🐰</div>
-   <h3>Coelho da Sorte</h3>
-   <button onclick="alert('Em breve!')">Em breve</button>
+   <h3>Coelhinho da Sorte</h3>
+   <p>Jogo demonstrativo</p>
+   <button onclick="abrir('Coelhinho da Sorte')">Conhecer</button>
   </div>
-
   <div class="jogo">
-   <div class="emoji">🐉</div>
-   <h3>Dragão Mágico</h3>
-   <button onclick="alert('Em breve!')">Em breve</button>
+   <div class="emoji">🍀</div>
+   <h3>Fortune Rabbit</h3>
+   <p>Jogo demonstrativo</p>
+   <button onclick="abrir('Fortune Rabbit')">Conhecer</button>
   </div>
-
   <div class="jogo">
-   <div class="emoji">⭐</div>
-   <h3>Estrelas</h3>
-   <button onclick="alert('Em breve!')">Em breve</button>
+   <div class="emoji">💎</div>
+   <h3>Jogo Extra</h3>
+   <p>Novidades em breve</p>
+   <button onclick="abrir('Jogo Extra')">Conhecer</button>
   </div>
+ </div>
+ <div id="mensagem"></div>
+
+ <section class="info">
+  <h3>Sobre a plataforma</h3>
+  A NEXA PLAY é uma plataforma demonstrativa de entretenimento.
+  Os créditos são fictícios e não podem ser comprados, sacados
+  ou convertidos em dinheiro.
  </section>
-
- <section class="game" id="game">
-  <h2>🐯 Tigre Dourado</h2>
-  <p>Encontre símbolos iguais!</p>
-
-  <div class="pontuacao">
-   Pontos: <span id="pontos">0</span>
-  </div>
-
-  <div class="rolos">
-   <div class="rolo" id="r1">🐯</div>
-   <div class="rolo" id="r2">💎</div>
-   <div class="rolo" id="r3">⭐</div>
-  </div>
-
-  <button id="girar" onclick="girar()">GIRAR GRATUITAMENTE</button>
-
-  <p id="resultado">Vamos jogar!</p>
-  <p>Rodadas: <span id="rodadas">0</span></p>
-
-  <button class="voltar" onclick="fecharJogo()">
-   Voltar aos jogos
-  </button>
- </section>
-
- <footer>
-  NEXA PLAY © 2026<br>
-  Entretenimento demonstrativo.
-  Pontos sem valor monetário ou possibilidade de resgate.
- </footer>
 </main>
-
+<nav>
+ <span>🏠 Início</span>
+ <span>🎮 Jogos</span>
+ <span>🪙 Carteira</span>
+ <span>👤 Perfil</span>
+</nav>
 <script>
-let pontos=0;
-let rodadas=0;
-let ocupado=false;
-
-const simbolos=["🐯","💎","⭐","🍀","🐰","🔔"];
-
-function abrirJogo(){
- document.getElementById("game").style.display="block";
- document.getElementById("game").scrollIntoView({
-  behavior:"smooth"
- });
+let creditos=1000;
+function atualizar(){
+ document.getElementById("saldo").textContent=
+ creditos.toLocaleString("pt-BR")+" créditos";
 }
-
-function fecharJogo(){
- document.getElementById("game").style.display="none";
+function bonus(){
+ creditos+=100;
+ atualizar();
+ document.getElementById("mensagem").textContent=
+ "Você recebeu 100 créditos fictícios!";
 }
-
-function girar(){
- if(ocupado)return;
-
- ocupado=true;
-
- const botao=document.getElementById("girar");
- botao.disabled=true;
-
- const rolos=[
-  document.getElementById("r1"),
-  document.getElementById("r2"),
-  document.getElementById("r3")
- ];
-
- rolos.forEach(r=>r.classList.add("rolando"));
-
- let tempo=0;
-
- const animacao=setInterval(()=>{
-  rolos.forEach(r=>{
-   r.textContent=simbolos[
-    Math.floor(Math.random()*simbolos.length)
-   ];
-  });
-
-  tempo+=100;
-
-  if(tempo>=1200){
-   clearInterval(animacao);
-
-   const resultado=rolos.map(r=>{
-    r.classList.remove("rolando");
-    return r.textContent;
-   });
-
-   calcularResultado(resultado);
-
-   ocupado=false;
-   botao.disabled=false;
-  }
- },100);
-}
-
-function calcularResultado(r){
- rodadas++;
-
- if(r[0]===r[1] && r[1]===r[2]){
-  pontos+=100;
-  mensagem="🐯 TRÊS IGUAIS! +100 pontos!";
- }else if(r[0]===r[1] ||
-          r[1]===r[2] ||
-          r[0]===r[2]){
-  pontos+=25;
-  mensagem="✨ Dois símbolos iguais! +25 pontos!";
- }else{
-  pontos+=5;
-  mensagem="Boa rodada! +5 pontos!";
- }
-
- document.getElementById("pontos").textContent=pontos;
- document.getElementById("rodadas").textContent=rodadas;
- document.getElementById("resultado").textContent=mensagem;
+function abrir(nome){
+ document.getElementById("mensagem").textContent=
+ nome+" — demonstração em desenvolvimento!";
 }
 </script>
 </body>
