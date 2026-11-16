@@ -8,12 +8,16 @@
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;background:#080e1b;color:white;
+ margin:0;
+ background:#080e1b;
+ color:white;
  font-family:Arial,sans-serif
 }
 header{
- background:#101c32;padding:20px;
- display:flex;justify-content:space-between;
+ background:#101c32;
+ padding:20px;
+ display:flex;
+ justify-content:space-between;
  align-items:center
 }
 .logo{font-size:26px;font-weight:bold}
@@ -21,32 +25,81 @@ header{
 main{max-width:1000px;margin:auto;padding:20px}
 .banner{
  background:linear-gradient(120deg,#174b91,#101c32);
- padding:30px;border-radius:16px;margin-bottom:25px
+ padding:30px;
+ border-radius:16px;
+ margin-bottom:25px
 }
-.banner h1{font-size:30px}
 button{
- background:#1768e8;color:white;border:0;
- padding:13px 20px;border-radius:9px;
- font-weight:bold;cursor:pointer
+ background:#1768e8;
+ color:white;
+ border:0;
+ padding:13px 20px;
+ border-radius:9px;
+ font-weight:bold;
+ cursor:pointer
 }
+button:disabled{opacity:.5}
 .grid{
- display:grid;grid-template-columns:repeat(2,1fr);
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
  gap:15px
 }
 .jogo{
- background:#14243d;padding:20px;
- border-radius:14px;text-align:center
+ background:#14243d;
+ padding:20px;
+ border-radius:14px;
+ text-align:center
 }
 .emoji{font-size:55px;margin:12px}
-.jogo h3{margin:10px}
+.game{
+ display:none;
+ background:#101c32;
+ margin-top:25px;
+ padding:22px;
+ border:1px solid #2866b0;
+ border-radius:16px;
+ text-align:center
+}
+.rolos{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:9px;
+ margin:25px 0
+}
+.rolo{
+ background:#172e50;
+ border:2px solid #398cff;
+ border-radius:12px;
+ font-size:clamp(38px,13vw,65px);
+ padding:18px 2px
+}
+.rolando{animation:giro .15s infinite alternate}
+@keyframes giro{
+ from{transform:translateY(-5px)}
+ to{transform:translateY(5px)}
+}
+.pontuacao{
+ color:#ffd65a;
+ font-size:24px;
+ font-weight:bold
+}
+#resultado{
+ min-height:30px;
+ color:#85baff;
+ font-weight:bold
+}
+.voltar{margin-top:15px;background:#344964}
 footer{
- text-align:center;padding:30px;color:#9bb1ce
+ text-align:center;
+ padding:30px;
+ color:#9bb1ce
 }
 @media(min-width:700px){
  .grid{grid-template-columns:repeat(4,1fr)}
 }
 </style>
 </head>
+
 <body>
 <header>
  <div class="logo">NEXA <span>PLAY</span></div>
@@ -66,39 +119,139 @@ footer{
   <div class="jogo">
    <div class="emoji">🐯</div>
    <h3>Tigre Dourado</h3>
-   <button onclick="jogar('Tigre Dourado')">Conhecer</button>
+   <button onclick="abrirJogo()">Jogar grátis</button>
   </div>
 
   <div class="jogo">
    <div class="emoji">🐰</div>
    <h3>Coelho da Sorte</h3>
-   <button onclick="jogar('Coelho da Sorte')">Conhecer</button>
+   <button onclick="alert('Em breve!')">Em breve</button>
   </div>
 
   <div class="jogo">
    <div class="emoji">🐉</div>
    <h3>Dragão Mágico</h3>
-   <button onclick="jogar('Dragão Mágico')">Conhecer</button>
+   <button onclick="alert('Em breve!')">Em breve</button>
   </div>
 
   <div class="jogo">
    <div class="emoji">⭐</div>
    <h3>Estrelas</h3>
-   <button onclick="jogar('Estrelas')">Conhecer</button>
+   <button onclick="alert('Em breve!')">Em breve</button>
   </div>
+ </section>
+
+ <section class="game" id="game">
+  <h2>🐯 Tigre Dourado</h2>
+  <p>Encontre símbolos iguais!</p>
+
+  <div class="pontuacao">
+   Pontos: <span id="pontos">0</span>
+  </div>
+
+  <div class="rolos">
+   <div class="rolo" id="r1">🐯</div>
+   <div class="rolo" id="r2">💎</div>
+   <div class="rolo" id="r3">⭐</div>
+  </div>
+
+  <button id="girar" onclick="girar()">GIRAR GRATUITAMENTE</button>
+
+  <p id="resultado">Vamos jogar!</p>
+  <p>Rodadas: <span id="rodadas">0</span></p>
+
+  <button class="voltar" onclick="fecharJogo()">
+   Voltar aos jogos
+  </button>
  </section>
 
  <footer>
   NEXA PLAY © 2026<br>
-  Plataforma demonstrativa de jogos gratuitos.
-  Sem apostas ou dinheiro real.
+  Entretenimento demonstrativo.
+  Pontos sem valor monetário ou possibilidade de resgate.
  </footer>
 </main>
 
 <script>
-function jogar(nome){
- alert("Bem-vindo ao jogo "+nome+
- "! Em breve teremos novidades.");
+let pontos=0;
+let rodadas=0;
+let ocupado=false;
+
+const simbolos=["🐯","💎","⭐","🍀","🐰","🔔"];
+
+function abrirJogo(){
+ document.getElementById("game").style.display="block";
+ document.getElementById("game").scrollIntoView({
+  behavior:"smooth"
+ });
+}
+
+function fecharJogo(){
+ document.getElementById("game").style.display="none";
+}
+
+function girar(){
+ if(ocupado)return;
+
+ ocupado=true;
+
+ const botao=document.getElementById("girar");
+ botao.disabled=true;
+
+ const rolos=[
+  document.getElementById("r1"),
+  document.getElementById("r2"),
+  document.getElementById("r3")
+ ];
+
+ rolos.forEach(r=>r.classList.add("rolando"));
+
+ let tempo=0;
+
+ const animacao=setInterval(()=>{
+  rolos.forEach(r=>{
+   r.textContent=simbolos[
+    Math.floor(Math.random()*simbolos.length)
+   ];
+  });
+
+  tempo+=100;
+
+  if(tempo>=1200){
+   clearInterval(animacao);
+
+   const resultado=rolos.map(r=>{
+    r.classList.remove("rolando");
+    return r.textContent;
+   });
+
+   calcularResultado(resultado);
+
+   ocupado=false;
+   botao.disabled=false;
+  }
+ },100);
+}
+
+function calcularResultado(r){
+ rodadas++;
+
+ if(r[0]===r[1] && r[1]===r[2]){
+  pontos+=100;
+  mensagem="🐯 TRÊS IGUAIS! +100 pontos!";
+ }else if(r[0]===r[1] ||
+          r[1]===r[2] ||
+          r[0]===r[2]){
+  pontos+=25;
+  mensagem="✨ Dois símbolos iguais! +25 pontos!";
+ }else{
+  pontos+=5;
+  mensagem="Boa rodada! +5 pontos!";
+ }
+
+ document.getElementById("pontos").textContent=pontos;
+ document.getElementById("rodadas").textContent=rodadas;
+ document.getElementById("resultado").textContent=mensagem;
 }
 </script>
 </body>
