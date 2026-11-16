@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NEXA PLAY</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#080e1b;color:white;
+ font-family:Arial,sans-serif
+}
+header{
+ background:#101c32;padding:20px;
+ display:flex;justify-content:space-between;
+ align-items:center
+}
+.logo{font-size:26px;font-weight:bold}
+.logo span{color:#398cff}
+main{max-width:1000px;margin:auto;padding:20px}
+.banner{
+ background:linear-gradient(120deg,#174b91,#101c32);
+ padding:30px;border-radius:16px;margin-bottom:25px
+}
+.banner h1{font-size:30px}
+button{
+ background:#1768e8;color:white;border:0;
+ padding:13px 20px;border-radius:9px;
+ font-weight:bold;cursor:pointer
+}
+.grid{
+ display:grid;grid-template-columns:repeat(2,1fr);
+ gap:15px
+}
+.jogo{
+ background:#14243d;padding:20px;
+ border-radius:14px;text-align:center
+}
+.emoji{font-size:55px;margin:12px}
+.jogo h3{margin:10px}
+footer{
+ text-align:center;padding:30px;color:#9bb1ce
+}
+@media(min-width:700px){
+ .grid{grid-template-columns:repeat(4,1fr)}
+}
+</style>
+</head>
+<body>
+<header>
+ <div class="logo">NEXA <span>PLAY</span></div>
+ <div>🎮 Jogos gratuitos</div>
+</header>
+
+<main>
+ <section class="banner">
+  <h1>A diversão começa aqui!</h1>
+  <p>Bem-vindo à NEXA PLAY.</p>
+  <p>Explore nossos jogos gratuitos!</p>
+ </section>
+
+ <h2>🎮 Nossos jogos</h2>
+
+ <section class="grid">
+  <div class="jogo">
+   <div class="emoji">🐯</div>
+   <h3>Tigre Dourado</h3>
+   <button onclick="jogar('Tigre Dourado')">Conhecer</button>
+  </div>
+
+  <div class="jogo">
+   <div class="emoji">🐰</div>
+   <h3>Coelho da Sorte</h3>
+   <button onclick="jogar('Coelho da Sorte')">Conhecer</button>
+  </div>
+
+  <div class="jogo">
+   <div class="emoji">🐉</div>
+   <h3>Dragão Mágico</h3>
+   <button onclick="jogar('Dragão Mágico')">Conhecer</button>
+  </div>
+
+  <div class="jogo">
+   <div class="emoji">⭐</div>
+   <h3>Estrelas</h3>
+   <button onclick="jogar('Estrelas')">Conhecer</button>
+  </div>
+ </section>
+
+ <footer>
+  NEXA PLAY © 2026<br>
+  Plataforma demonstrativa de jogos gratuitos.
+  Sem apostas ou dinheiro real.
+ </footer>
+</main>
+
+<script>
+function jogar(nome){
+ alert("Bem-vindo ao jogo "+nome+
+ "! Em breve teremos novidades.");
+}
+</script>
+</body>
+</html>
